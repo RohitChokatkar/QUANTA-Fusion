@@ -245,7 +245,53 @@ class FyersRESTClient:
         # Ensure fresh token
         self._ensure_token()
 
-        # Try Fyers first
+        # Try Fyers direct HTTP first (more reliable than SDK)
+        if self.access_token and self.client_id:
+            try:
+                now = datetime.now()
+                start = now - timedelta(days=days)
+                resolution_map = {
+                    "1min": "1", "5min": "5", "15min": "15",
+                    "1h": "60", "1day": "D",
+                }
+                params = {
+                    "symbol": symbol,
+                    "resolution": resolution_map.get(interval, "5"),
+                    "date_format": "1",
+                    "range_from": start.strftime("%Y-%m-%d"),
+                    "range_to": now.strftime("%Y-%m-%d"),
+                    "cont_flag": "1",
+                }
+                headers = {
+                    "Authorization": f"{self.client_id}:{self.access_token}",
+                }
+                resp = await self._http.get(
+                    "https://api-t1.fyers.in/api/v3/history/",
+                    params=params,
+                    headers=headers,
+                    timeout=15,
+                )
+                response = resp.json()
+
+                logger.info("[FYERS] History for %s: status=%s candles=%d",
+                            symbol, response.get("s"), len(response.get("candles", [])))
+
+                if response.get("candles"):
+                    return [
+                        {
+                            "time": datetime.fromtimestamp(c[0]).isoformat(),
+                            "open": c[1], "high": c[2], "low": c[3],
+                            "close": c[4], "volume": int(c[5]),
+                        }
+                        for c in response["candles"]
+                    ]
+                else:
+                    logger.warning("[FYERS] No candles in history response for %s: %s",
+                                   symbol, str(response)[:200])
+            except Exception as e:
+                logger.warning(f"Fyers HTTP history failed for {symbol}: {e}")
+
+        # Also try Fyers SDK as secondary attempt
         if self.fyers and self.access_token:
             try:
                 now = datetime.now()
@@ -262,13 +308,10 @@ class FyersRESTClient:
                     "range_to": now.strftime("%Y-%m-%d"),
                     "cont_flag": "1",
                 }
-                # Run sync SDK call in thread
                 response = await asyncio.to_thread(self.fyers.history, data=data)
 
-                logger.debug("[FYERS_DEBUG] History response for %s: %d candles",
-                             symbol, len(response.get("candles", [])) if response else 0)
-
                 if response and response.get("candles"):
+                    logger.info("[FYERS SDK] History success for %s: %d candles", symbol, len(response["candles"]))
                     return [
                         {
                             "time": datetime.fromtimestamp(c[0]).isoformat(),
@@ -277,8 +320,10 @@ class FyersRESTClient:
                         }
                         for c in response["candles"]
                     ]
+                else:
+                    logger.warning("[FYERS SDK] No candles for %s: %s", symbol, str(response)[:200])
             except Exception as e:
-                logger.warning(f"Fyers history failed for {symbol}: {e}")
+                logger.warning(f"Fyers SDK history failed for {symbol}: {e}")
 
         # Fallback to TwelveData
         return await self._td_history(symbol, interval, days)
@@ -290,24 +335,30 @@ class FyersRESTClient:
 
         formats_to_try = [td_symbol, simple]
 
+        # Fix outputsize for daily intervals
+        if interval in ("1day", "D"):
+            outputsize = min(days, 500)
+        else:
+            outputsize = min(days * 78, 500)
+
         for fmt in formats_to_try:
             try:
-                outputsize = min(days * 78, 500)  # 78 bars per day for 5min
                 resp = await self._http.get(
                     "https://api.twelvedata.com/time_series",
                     params={
                         "symbol": fmt,
-                        "interval": interval,
+                        "interval": interval if interval != "D" else "1day",
                         "outputsize": outputsize,
                         "apikey": self._td_key,
                     },
                 )
                 d = resp.json()
 
-                logger.debug("[TD_DEBUG] History for %s (fmt=%s): %d values",
-                             symbol, fmt, len(d.get("values", [])))
+                logger.info("[TD] History for %s (fmt=%s): status=%s values=%d",
+                            symbol, fmt, d.get("status", "ok"), len(d.get("values", [])))
 
                 if d.get("code"):
+                    logger.warning("[TD] Error for %s: %s", fmt, d.get("message", ""))
                     continue
 
                 values = d.get("values", [])
@@ -325,10 +376,10 @@ class FyersRESTClient:
                 if bars:
                     return bars
             except Exception as e:
-                logger.debug("[TD_DEBUG] History format %s exception: %s", fmt, e)
+                logger.warning("[TD] History format %s exception: %s", fmt, e)
                 continue
 
-        logger.error("TwelveData history failed for all formats: %s", symbol)
+        logger.error("All history sources failed for: %s", symbol)
         return []
 
     async def get_daily_history(self, symbol: str, days: int = 365) -> list[dict]:
