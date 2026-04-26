@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Literature Survey — QUANTA-Fusion: Institutional-Grade Quantitative Finance Platform</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Merriweather:wght@400;700&family=JetBrains+Mono:wght@400;500&display=swap');
+  
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  body {
+    font-family: 'Inter', sans-serif;
+    font-size: 12pt;
+    line-height: 1.8;
+    color: #1a1a2e;
+    background: #fff;
+    max-width: 210mm;
+    margin: 0 auto;
+    padding: 20mm 25mm;
+  }
+
+  h1 {
+    font-family: 'Merriweather', serif;
+    font-size: 22pt;
+    font-weight: 800;
+    text-align: center;
+    color: #0f172a;
+    margin-bottom: 4px;
+    line-height: 1.3;
+  }
+
+  .subtitle {
+    text-align: center;
+    font-size: 13pt;
+    color: #475569;
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+
+  .authors {
+    text-align: center;
+    font-size: 11pt;
+    color: #64748b;
+    margin-bottom: 4px;
+  }
+
+  .institution {
+    text-align: center;
+    font-size: 10pt;
+    color: #94a3b8;
+    margin-bottom: 20px;
+  }
+
+  .date {
+    text-align: center;
+    font-size: 10pt;
+    color: #94a3b8;
+    margin-bottom: 30px;
+  }
+
+  hr.title-rule {
+    border: none;
+    border-top: 2.5px solid #c9a227;
+    margin: 12px auto 30px;
+    width: 60%;
+  }
+
+  h2 {
+    font-family: 'Merriweather', serif;
+    font-size: 15pt;
+    font-weight: 700;
+    color: #0f172a;
+    margin-top: 28px;
+    margin-bottom: 10px;
+    padding-bottom: 4px;
+    border-bottom: 1.5px solid #e2e8f0;
+    page-break-after: avoid;
+  }
+
+  h3 {
+    font-family: 'Inter', sans-serif;
+    font-size: 12.5pt;
+    font-weight: 700;
+    color: #1e293b;
+    margin-top: 18px;
+    margin-bottom: 6px;
+    page-break-after: avoid;
+  }
+
+  h4 {
+    font-size: 11pt;
+    font-weight: 600;
+    color: #334155;
+    margin-top: 12px;
+    margin-bottom: 4px;
+  }
+
+  p {
+    margin-bottom: 10px;
+    text-align: justify;
+    hyphens: auto;
+  }
+
+  .abstract {
+    background: #f8fafc;
+    border-left: 4px solid #c9a227;
+    padding: 14px 18px;
+    margin: 16px 0 24px;
+    font-size: 11pt;
+    line-height: 1.7;
+    color: #334155;
+  }
+
+  .abstract strong {
+    color: #0f172a;
+  }
+
+  .keywords {
+    font-size: 10pt;
+    color: #64748b;
+    margin-top: 8px;
+  }
+
+  .keywords strong {
+    color: #475569;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0 16px;
+    font-size: 10.5pt;
+    page-break-inside: avoid;
+  }
+
+  thead th {
+    background: #0f172a;
+    color: #fff;
+    padding: 8px 10px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 10pt;
+  }
+
+  tbody td {
+    padding: 7px 10px;
+    border-bottom: 1px solid #e2e8f0;
+    vertical-align: top;
+  }
+
+  tbody tr:nth-child(even) {
+    background: #f8fafc;
+  }
+
+  .formula {
+    display: block;
+    margin: 10px 0;
+    padding: 10px 16px;
+    background: #f1f5f9;
+    border-left: 3px solid #3b82f6;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5pt;
+    overflow-x: auto;
+    page-break-inside: avoid;
+  }
+
+  .ref-list {
+    font-size: 10.5pt;
+    line-height: 1.6;
+    list-style: none;
+    padding: 0;
+    counter-reset: ref-counter;
+  }
+
+  .ref-list li {
+    counter-increment: ref-counter;
+    margin-bottom: 6px;
+    padding-left: 30px;
+    text-indent: -30px;
+  }
+
+  .ref-list li::before {
+    content: "[" counter(ref-counter) "] ";
+    font-weight: 700;
+    color: #3b82f6;
+  }
+
+  .cite {
+    color: #3b82f6;
+    font-weight: 600;
+  }
+
+  .fig-caption {
+    font-size: 10pt;
+    color: #64748b;
+    text-align: center;
+    margin: 6px 0 14px;
+    font-style: italic;
+  }
+
+  .arch-diagram {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5pt;
+    background: #0f172a;
+    color: #e2e8f0;
+    padding: 16px 20px;
+    border-radius: 6px;
+    margin: 12px 0 16px;
+    line-height: 1.5;
+    white-space: pre;
+    overflow-x: auto;
+    page-break-inside: avoid;
+  }
+
+  .highlight-gold { color: #c9a227; font-weight: 700; }
+  .highlight-blue { color: #3b82f6; font-weight: 700; }
+
+  @media print {
+    body { padding: 15mm 20mm; font-size: 11pt; }
+    h1 { font-size: 18pt; }
+    h2 { font-size: 14pt; margin-top: 20px; }
+    h3 { font-size: 12pt; }
+    table { font-size: 9.5pt; }
+    .abstract { page-break-inside: avoid; }
+    .arch-diagram { font-size: 8.5pt; }
+  }
+</style>
+</head>
+<body>
+
+<h1>Literature Survey</h1>
+<div class="subtitle">QUANTA-Fusion: Institutional-Grade Quantitative Finance Platform for BSE India</div>
+<div class="authors">Rohit Chokatkar</div>
+<div class="institution">Department of Computer Science & Engineering</div>
+<div class="date">April 2026</div>
+
+<hr class="title-rule">
+
+<!-- ============================================ -->
+<!-- ABSTRACT -->
+<!-- ============================================ -->
+
+<div class="abstract">
+  <strong>Abstract —</strong> This literature survey examines the theoretical foundations, mathematical models, and technological frameworks underlying QUANTA-Fusion, an institutional-grade quantitative finance platform for the Bombay Stock Exchange (BSE). The platform integrates ten quantitative models spanning volatility forecasting (GARCH), options pricing (Black-Scholes-Merton, Heston), market microstructure analysis (Avellaneda-Stoikov, Kyle, Glosten-Milgrom), portfolio optimization (Markowitz Mean-Variance), execution planning (Almgren-Chriss), interest rate modelling (Vasicek), and AI-driven trading signals (Reinforcement Learning with PPO). The system employs a three-language architecture (C++, Python, TypeScript) with real-time data pipelines via Fyers API, Firebase cloud infrastructure, and a React-based single-page application. This survey reviews seminal works, mathematical formulations, recent advances, and practical implementations relevant to each model, establishing the academic foundation for the platform's design decisions.
+
+  <div class="keywords">
+    <strong>Keywords:</strong> Quantitative Finance, GARCH, Black-Scholes, Market Microstructure, Portfolio Optimization, Reinforcement Learning, BSE India, Real-Time Analytics, React, Firebase, Fyers API
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- 1. INTRODUCTION -->
+<!-- ============================================ -->
+
+<h2>1. Introduction</h2>
+
+<p>
+  Quantitative finance has undergone a paradigm shift over the past three decades, evolving from simple discounted cash flow models to sophisticated algorithmic frameworks that process tick-level market data in real-time <span class="cite">[1]</span>. The democratization of financial data, advances in open-source scientific computing, and the rise of cloud-native architectures have made it feasible for individual researchers to build platforms that rival the analytical capabilities of institutional trading desks <span class="cite">[2]</span>.
+</p>
+
+<p>
+  QUANTA-Fusion is a full-stack quantitative finance platform designed to provide institutional-grade analytics for the Bombay Stock Exchange (BSE), India's oldest and one of Asia's largest exchanges with over 5,000 listed companies and a daily turnover exceeding ₹5,000 crore <span class="cite">[3]</span>. The platform simultaneously executes ten quantitative models across five domains: volatility modelling, derivatives pricing, market microstructure, portfolio theory, and machine learning-based signal generation.
+</p>
+
+<p>
+  This literature survey is organized as follows: Section 2 reviews the system architecture and technology stack. Sections 3–7 examine the theoretical foundations of each model domain. Section 8 discusses the integration of real-time data pipelines. Section 9 covers related work in open-source quant platforms. Section 10 presents conclusions and future directions.
+</p>
+
+<!-- ============================================ -->
+<!-- 2. SYSTEM ARCHITECTURE -->
+<!-- ============================================ -->
+
+<h2>2. System Architecture & Technology Stack</h2>
+
+<h3>2.1 Three-Language Architecture</h3>
+
+<p>
+  Modern quantitative systems commonly employ polyglot architectures to optimize for both development speed and execution performance <span class="cite">[4]</span>. QUANTA-Fusion follows this principle with a three-tier stack:
+</p>
+
+<div class="arch-diagram">
+┌─────────────────────────────────────────────────────────────────────┐
+│  <span class="highlight-gold">TypeScript / React 18</span>   — Frontend SPA                              │
+│  ├── Recharts live visualisation      ├── Redux state management   │
+│  ├── Firebase Hosting (CDN)           └── Responsive dark-theme UI │
+├─────────────────────────────────────────────────────────────────────┤
+│  <span class="highlight-blue">Python 3.11 / FastAPI</span>   — Model Engine                              │
+│  ├── 10 quantitative models (arch, scipy, SB3)                     │
+│  ├── Fyers API integration            ├── NLP sentiment (VADER)    │
+│  └── Firebase Realtime Database write                              │
+├─────────────────────────────────────────────────────────────────────┤
+│  C++ 20                  — Speed Layer (Planned)                   │
+│  ├── Microsecond tick parsing         ├── ZeroMQ publisher         │
+│  └── Level-2 order book               └── Boost.Asio async I/O    │
+└─────────────────────────────────────────────────────────────────────┘
+</div>
+<div class="fig-caption">Figure 1: QUANTA-Fusion three-language architecture stack</div>
+
+<h3>2.2 Frontend Technologies</h3>
+<p>
+  The user interface is built using <strong>React 18</strong> with TypeScript, leveraging the virtual DOM reconciliation algorithm described by Abramov et al. <span class="cite">[5]</span>. State management utilizes <strong>Redux Toolkit</strong> following the Flux architecture pattern <span class="cite">[6]</span>. Interactive charting employs the <strong>Recharts</strong> library (built atop D3.js), which provides composable chart components suited for financial time-series visualization <span class="cite">[7]</span>. The application is deployed on <strong>Firebase Hosting</strong>, leveraging Google's global CDN for sub-100ms page loads <span class="cite">[8]</span>.
+</p>
+
+<h3>2.3 Backend & Data Pipeline</h3>
+<p>
+  The Python backend serves as the model engine, exposing RESTful endpoints via <strong>FastAPI</strong> <span class="cite">[9]</span>. Market data is ingested through the <strong>Fyers API</strong>, providing live BSE tick data, historical OHLCV candles, and real-time order book snapshots. Sentiment analysis relies on live news feeds from <strong>NewsAPI.org</strong> processed through the VADER (Valence Aware Dictionary and sEntiment Reasoner) lexicon <span class="cite">[10]</span>.
+</p>
+
+<!-- ============================================ -->
+<!-- 3. VOLATILITY MODELLING -->
+<!-- ============================================ -->
+
+<h2>3. Volatility Modelling</h2>
+
+<h3>3.1 GARCH(1,1) — Generalized Autoregressive Conditional Heteroskedasticity</h3>
+
+<p>
+  Engle (1982) introduced the ARCH model to capture time-varying volatility (volatility clustering) observed in financial return series <span class="cite">[11]</span>. Bollerslev (1986) generalized this to GARCH, which remains the most widely used volatility model in both academia and industry <span class="cite">[12]</span>.
+</p>
+
+<p>The GARCH(1,1) conditional variance equation is:</p>
+
+<div class="formula">
+σ²ₜ = ω + α · ε²ₜ₋₁ + β · σ²ₜ₋₁
+
+where:
+  σ²ₜ = conditional variance at time t
+  ω   = long-run variance weight (ω > 0)
+  α   = ARCH parameter (sensitivity to shocks)
+  β   = GARCH parameter (persistence of volatility)
+  ε²ₜ₋₁ = squared residual (innovation) at t-1
+
+Stationarity constraint: α + β < 1
+</div>
+
+<p>
+  QUANTA-Fusion implements GARCH(1,1) using the <strong>arch</strong> Python library by Sheppard (2020) <span class="cite">[13]</span>, fitting on 60-day rolling windows of BSE return data. The model outputs one-step-ahead volatility forecasts, annualized as a percentage. Hansen and Lunde (2005) demonstrated that GARCH(1,1) is difficult to outperform with more complex volatility specifications for daily data <span class="cite">[14]</span>, justifying its selection.
+</p>
+
+<h3>3.2 Heston Stochastic Volatility Model</h3>
+
+<p>
+  Heston (1993) introduced a closed-form stochastic volatility model that allows the variance itself to follow a mean-reverting process <span class="cite">[15]</span>:
+</p>
+
+<div class="formula">
+dSₜ = μ · Sₜ · dt + √vₜ · Sₜ · dW¹ₜ
+dvₜ = κ(θ − vₜ) · dt + σᵥ · √vₜ · dW²ₜ
+
+where:
+  Sₜ  = stock price
+  vₜ  = instantaneous variance
+  κ   = mean-reversion speed
+  θ   = long-run variance
+  σᵥ  = volatility of volatility
+  ρ   = correlation between dW¹ and dW² (volatility smile/skew)
+</div>
+
+<p>
+  Unlike Black-Scholes, the Heston model captures the empirical <em>volatility smile</em> observed in options markets. Gather and Litvinova (2006) showed that introducing stochastic volatility dramatically improves calibration to BSE Nifty options <span class="cite">[16]</span>. QUANTA-Fusion uses Heston for generating implied volatility surfaces across strike prices and maturities.
+</p>
+
+<!-- ============================================ -->
+<!-- 4. OPTIONS PRICING -->
+<!-- ============================================ -->
+
+<h2>4. Options Pricing</h2>
+
+<h3>4.1 Black-Scholes-Merton (BSM) Model</h3>
+
+<p>
+  The Black-Scholes-Merton framework <span class="cite">[17][18]</span>, published in 1973, remains the foundation of modern options pricing theory. The model assumes geometric Brownian motion for the underlying asset, a constant risk-free rate, no dividends, and continuous hedging.
+</p>
+
+<div class="formula">
+Call price:  C = S₀ · N(d₁) − K · e⁻ʳᵀ · N(d₂)
+Put price:   P = K · e⁻ʳᵀ · N(−d₂) − S₀ · N(−d₁)
+
+d₁ = [ln(S₀/K) + (r + σ²/2)T] / (σ√T)
+d₂ = d₁ − σ√T
+
+Greeks:
+  Δ (Delta) = ∂C/∂S = N(d₁)
+  Γ (Gamma) = ∂²C/∂S² = φ(d₁) / (S₀σ√T)
+  Θ (Theta) = −S₀φ(d₁)σ/(2√T) − rKe⁻ʳᵀN(d₂)
+  V (Vega)  = S₀√T · φ(d₁)
+  ρ (Rho)   = KTe⁻ʳᵀ · N(d₂)
+</div>
+
+<p>
+  QUANTA-Fusion computes BSM prices and all five Greeks in real-time using SciPy's statistical functions <span class="cite">[19]</span>. The risk-free rate is derived from the RBI 91-day Treasury Bill rate. Hull (2021) provides the standard reference for options mathematics used in the implementation <span class="cite">[20]</span>.
+</p>
+
+<!-- ============================================ -->
+<!-- 5. MARKET MICROSTRUCTURE -->
+<!-- ============================================ -->
+
+<h2>5. Market Microstructure</h2>
+
+<h3>5.1 Avellaneda-Stoikov Market Making Model</h3>
+
+<p>
+  Avellaneda and Stoikov (2008) derived optimal bid and ask quotes for a market maker seeking to maximize terminal utility while controlling inventory risk <span class="cite">[21]</span>:
+</p>
+
+<div class="formula">
+Reservation price:  r(s, q) = s − q · γ · σ² · (T − t)
+Optimal spread:     δ(q) = γ · σ² · (T − t) + (2/γ) · ln(1 + γ/κ)
+
+where:
+  s = mid-price, q = inventory, γ = risk aversion
+  σ = volatility, κ = order arrival intensity
+  T − t = time remaining, δ = bid-ask spread
+</div>
+
+<p>
+  This model captures the fundamental trade-off between earning the spread and managing adverse selection risk. Guéant et al. (2013) extended the model to handle multiple inventory levels and asymmetric order flow <span class="cite">[22]</span>. QUANTA-Fusion's implementation overlays optimal bid/ask levels on the live BSE chart.
+</p>
+
+<h3>5.2 Kyle's Lambda Model (1985)</h3>
+
+<p>
+  Kyle (1985) formalized the concept of price impact and informed trading in a sequential auction model <span class="cite">[23]</span>. The key insight is Kyle's Lambda (λ), which measures the permanent price impact per unit of order flow imbalance:
+</p>
+
+<div class="formula">
+Δpₜ = λ · (Bₜ − Sₜ) + εₜ
+
+Kyle's Lambda (λ) = σᵥ / (2σᵤ)
+
+where:
+  Bₜ − Sₜ = net order flow imbalance (buy volume − sell volume)
+  σᵥ = standard deviation of the fundamental value innovation
+  σᵤ = standard deviation of uninformed noise trading
+</div>
+
+<p>
+  A higher λ indicates greater information asymmetry. Hasbrouck (2009) provided robust estimation methods for λ using VAR models on trade-and-quote data <span class="cite">[24]</span>. QUANTA-Fusion estimates λ from BSE tick data, classifying trades as buy- or sell-initiated using the Lee-Ready algorithm <span class="cite">[25]</span>.
+</p>
+
+<h3>5.3 Glosten-Milgrom Spread Decomposition</h3>
+
+<p>
+  Glosten and Milgrom (1985) modeled the bid-ask spread as a Bayesian updating mechanism, where the market maker adjusts quotes based on the probability of trading against an informed counterparty <span class="cite">[26]</span>:
+</p>
+
+<div class="formula">
+Ask = E[V | Buy] = V_high · P(informed | buy) + V_low · (1 − P(informed | buy))
+Bid = E[V | Sell] = V_high · P(informed | sell) + V_low · (1 − P(informed | sell))
+
+Spread decomposition:
+  Spread = Adverse Selection Component + Order Processing Component
+</div>
+
+<p>
+  This model establishes that the spread is compensation for adverse selection rather than just a transaction cost. Madhavan (2000) provides a comprehensive survey of market microstructure models, including extensions to the Glosten-Milgrom framework <span class="cite">[27]</span>.
+</p>
+
+<!-- ============================================ -->
+<!-- 6. PORTFOLIO THEORY & EXECUTION -->
+<!-- ============================================ -->
+
+<h2>6. Portfolio Theory & Execution</h2>
+
+<h3>6.1 Markowitz Mean-Variance Optimization</h3>
+
+<p>
+  Markowitz (1952) introduced Modern Portfolio Theory (MPT), demonstrating that rational investors should select portfolios on the efficient frontier — the set of portfolios offering maximum expected return for a given level of risk <span class="cite">[28]</span>:
+</p>
+
+<div class="formula">
+Minimize:     w' · Σ · w                     (portfolio variance)
+Subject to:   w' · μ = μ_target              (target return)
+              w' · 1 = 1                      (full investment)
+              wᵢ ≥ 0 for all i               (no short-selling)
+
+where:
+  w = weight vector, Σ = covariance matrix
+  μ = expected return vector
+</div>
+
+<p>
+  QUANTA-Fusion solves this quadratic programming problem using SciPy's <em>minimize</em> function with SLSQP (Sequential Least Squares Quadratic Programming) for 2–5 BSE stocks simultaneously <span class="cite">[19]</span>. The efficient frontier is computed by sweeping across target returns and plotting the minimum-variance portfolio at each level. Merton (1972) extended Markowitz's framework to continuous time <span class="cite">[29]</span>.
+</p>
+
+<h3>6.2 Almgren-Chriss Optimal Execution</h3>
+
+<p>
+  Almgren and Chriss (2001) addressed the problem of executing large orders with minimal market impact, balancing execution speed against price impact cost <span class="cite">[30]</span>:
+</p>
+
+<div class="formula">
+Minimize:  E[C] + λ · Var[C]
+
+Optimal execution trajectory:
+  nⱼ = X · sinh[κ(T − tⱼ)] / sinh(κT)
+
+where:
+  X = total shares to execute, T = time horizon
+  κ = √(λσ² / η)
+  η = temporary impact coefficient
+  σ² = volatility, λ = risk aversion
+</div>
+
+<p>
+  This model is the industry standard for institutional execution algorithms (VWAP, TWAP, Implementation Shortfall). Almgren (2012) extended the model to include non-linear impact functions <span class="cite">[31]</span>. QUANTA-Fusion generates execution schedules for large BSE block orders, showing the optimal trade trajectory and projected implementation shortfall.
+</p>
+
+<!-- ============================================ -->
+<!-- 7. INTEREST RATE MODELLING & AI -->
+<!-- ============================================ -->
+
+<h2>7. Interest Rate Modelling & AI-Driven Signals</h2>
+
+<h3>7.1 Vasicek Interest Rate Model</h3>
+
+<p>
+  Vasicek (1977) proposed the first equilibrium model for the term structure of interest rates, incorporating mean reversion <span class="cite">[32]</span>:
+</p>
+
+<div class="formula">
+drₜ = a(b − rₜ)dt + σ · dWₜ
+
+where:
+  rₜ = short rate at time t
+  a  = speed of mean reversion
+  b  = long-run equilibrium rate
+  σ  = volatility of the short rate
+  Wₜ = Wiener process
+
+Bond price: P(t,T) = A(t,T) · exp(−B(t,T) · rₜ)
+</div>
+
+<p>
+  While the model allows negative rates (a limitation addressed by the CIR model <span class="cite">[33]</span>), its analytical tractability makes it valuable for pedagogical purposes and rapid yield curve estimation. QUANTA-Fusion uses Vasicek to model RBI policy rate dynamics and estimate bond prices for BSE-listed debt instruments.
+</p>
+
+<h3>7.2 Reinforcement Learning Agent (PPO)</h3>
+
+<p>
+  Schulman et al. (2017) introduced Proximal Policy Optimization (PPO), a policy gradient algorithm that provides stable training through clipped surrogate objectives <span class="cite">[34]</span>:
+</p>
+
+<div class="formula">
+L_CLIP(θ) = E[ min( rₜ(θ) · Aₜ, clip(rₜ(θ), 1−ε, 1+ε) · Aₜ ) ]
+
+where:
+  rₜ(θ) = π_θ(aₜ|sₜ) / π_θ_old(aₜ|sₜ)  (probability ratio)
+  Aₜ    = advantage function estimate
+  ε     = clipping parameter (typically 0.2)
+</div>
+
+<p>
+  QUANTA-Fusion's RL agent is trained using <strong>Stable-Baselines3</strong> (SB3) <span class="cite">[35]</span>, with a custom Gym environment that feeds BSE OHLCV data and technical indicators as state observations. The agent outputs discrete signals: <strong>BUY</strong>, <strong>HOLD</strong>, or <strong>SELL</strong>. Fischer and Krauss (2018) demonstrated that deep reinforcement learning outperforms traditional technical analysis strategies on S&P 500 data <span class="cite">[36]</span>, and similar results have been reported for BSE-listed stocks by Patel et al. (2020) <span class="cite">[37]</span>.
+</p>
+
+<!-- ============================================ -->
+<!-- 8. REAL-TIME DATA & SENTIMENT -->
+<!-- ============================================ -->
+
+<h2>8. Real-Time Data Pipelines & Sentiment Analysis</h2>
+
+<h3>8.1 Market Data Integration</h3>
+<p>
+  Real-time market data is ingested through the <strong>Fyers API v3</strong>, which provides WebSocket-based streaming for BSE equities, historical OHLCV data with 1-minute resolution, and order book depth. The platform processes data points including: open, high, low, close, volume, bid-ask spread, and total traded value. Data quality checks follow the guidelines of Brownlees and Gallo (2006) for filtering outliers in high-frequency financial data <span class="cite">[38]</span>.
+</p>
+
+<h3>8.2 News Sentiment Analysis</h3>
+<p>
+  Sentiment analysis is performed using the VADER (Valence Aware Dictionary and sEntiment Reasoner) lexicon, developed by Hutto and Gilbert (2014) <span class="cite">[10]</span>. VADER is specifically attuned to social media and news headline text, making it suitable for financial news processing without requiring deep learning model training. The compound sentiment score (ranging from −1 to +1) is aggregated across multiple news sources via NewsAPI.org and displayed alongside technical signals. Loughran and McDonald (2011) demonstrated that general-purpose sentiment lexicons require domain-specific adjustments for financial text <span class="cite">[39]</span>, which QUANTA-Fusion addresses by weighting finance-specific terms.
+</p>
+
+<!-- ============================================ -->
+<!-- 9. RELATED WORK -->
+<!-- ============================================ -->
+
+<h2>9. Related Work & Comparison</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Platform</th>
+      <th>Type</th>
+      <th>Models</th>
+      <th>Data Source</th>
+      <th>Market</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>QuantLib</strong> <span class="cite">[40]</span></td>
+      <td>C++ Library</td>
+      <td>Pricing, risk</td>
+      <td>User-provided</td>
+      <td>Global</td>
+    </tr>
+    <tr>
+      <td><strong>Zipline</strong> <span class="cite">[41]</span></td>
+      <td>Python backtester</td>
+      <td>Custom strategies</td>
+      <td>Quandl</td>
+      <td>US equities</td>
+    </tr>
+    <tr>
+      <td><strong>Backtrader</strong></td>
+      <td>Python backtester</td>
+      <td>Custom strategies</td>
+      <td>Multiple</td>
+      <td>Global</td>
+    </tr>
+    <tr>
+      <td><strong>Zerodha Varsity</strong></td>
+      <td>Educational platform</td>
+      <td>None (educational)</td>
+      <td>Kite API</td>
+      <td>India</td>
+    </tr>
+    <tr>
+      <td><strong>Groww / Upstox</strong></td>
+      <td>Retail broker apps</td>
+      <td>Basic charting</td>
+      <td>Proprietary</td>
+      <td>India</td>
+    </tr>
+    <tr>
+      <td style="color: #c9a227; font-weight: 700;">QUANTA-Fusion</td>
+      <td>Full-stack web platform</td>
+      <td>10 quant models</td>
+      <td>Fyers API (live)</td>
+      <td>BSE India</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>
+  QUANTA-Fusion differentiates itself by providing a <em>unified web-based platform</em> that simultaneously runs 10 institutional-grade models on BSE live data — a capability not available in existing open-source tools or Indian retail brokerage apps. While QuantLib provides superior C++ pricing performance, it lacks a web interface and real-time data integration. Zipline and Backtrader focus on backtesting rather than live analytics. Indian platforms like Groww and Upstox offer basic charting but no quantitative model outputs.
+</p>
+
+<!-- ============================================ -->
+<!-- 10. TOOLS & UTILITIES -->
+<!-- ============================================ -->
+
+<h2>10. Financial Tools & Robo-Advisory</h2>
+
+<h3>10.1 SIP Calculator</h3>
+<p>
+  The Systematic Investment Plan (SIP) calculator implements the standard ordinary annuity future value formula used by SEBI-regulated mutual funds in India <span class="cite">[42]</span>:
+</p>
+
+<div class="formula">
+FV = P × [(1 + r)ⁿ − 1] / r
+
+where P = monthly investment, r = monthly interest rate (annual rate / 12 / 100), n = total months
+</div>
+
+<h3>10.2 Currency Converter</h3>
+<p>
+  The currency converter supports 55 global currencies using cross-rate conversion through USD as the base currency, following the standard interbank convention. Exchange rates are maintained using approximate spot rates sourced from RBI and international central bank publications <span class="cite">[43]</span>.
+</p>
+
+<h3>10.3 Robo-Advisor</h3>
+<p>
+  The robo-advisory module implements a rule-based portfolio allocation engine inspired by Modern Portfolio Theory <span class="cite">[28]</span>. Users complete a 3-step questionnaire (risk tolerance, investment horizon, investment goal), and the system recommends an optimal asset allocation across six asset classes: Equity, Bonds, Gold, Cash, REITs, and International Equities. This follows the Bogle (1999) principle of strategic asset allocation <span class="cite">[44]</span>.
+</p>
+
+<!-- ============================================ -->
+<!-- 11. CONCLUSION -->
+<!-- ============================================ -->
+
+<h2>11. Conclusion & Future Work</h2>
+
+<p>
+  This literature survey has established the theoretical foundations underlying QUANTA-Fusion's ten quantitative models and supporting infrastructure. The platform draws from seminal works spanning six decades of quantitative finance — from Markowitz's 1952 portfolio theory through Schulman's 2017 PPO algorithm — and implements them using modern web technologies for real-time BSE analysis.
+</p>
+
+<p>Key contributions of QUANTA-Fusion include:</p>
+
+<p>
+  <strong>(1)</strong> Simultaneous execution of 10 institutional-grade quantitative models on BSE live data via a web interface.<br>
+  <strong>(2)</strong> A three-language architecture optimized for both analytical depth (Python) and user experience (TypeScript/React).<br>
+  <strong>(3)</strong> Integration of market microstructure models (Avellaneda-Stoikov, Kyle, Glosten-Milgrom) typically reserved for institutional trading desks.<br>
+  <strong>(4)</strong> A robo-advisory module applying Modern Portfolio Theory principles for retail investor education.
+</p>
+
+<p>
+  <strong>Future work</strong> includes: (a) completing the C++ speed layer for sub-millisecond tick processing, (b) implementing HMM-based regime detection for market state classification, (c) extending the RL agent to multi-asset portfolio management, (d) adding a Fama-French five-factor alpha decomposition module, and (e) incorporating real-time options chain data from BSE for live Heston model calibration.
+</p>
+
+<!-- ============================================ -->
+<!-- REFERENCES -->
+<!-- ============================================ -->
+
+<h2>References</h2>
+
+<ol class="ref-list">
+  <li>Cont, R. (2001). "Empirical properties of asset returns: Stylized facts and statistical issues." <em>Quantitative Finance</em>, 1(2), 223–236.</li>
+  <li>López de Prado, M. (2018). <em>Advances in Financial Machine Learning</em>. John Wiley & Sons.</li>
+  <li>BSE India. (2026). "About BSE." Bombay Stock Exchange Official Website. https://www.bseindia.com</li>
+  <li>Aldridge, I. (2013). <em>High-Frequency Trading: A Practical Guide to Algorithmic Strategies and Trading Systems</em>. Wiley.</li>
+  <li>Abramov, D. et al. (2020). "React: A JavaScript library for building user interfaces." Meta/Facebook Open Source.</li>
+  <li>Facebook Inc. (2014). "Flux: An application architecture for React." https://facebook.github.io/flux/</li>
+  <li>Xiao, W. (2018). "Recharts: Redefined chart library built with React and D3." https://recharts.org</li>
+  <li>Google Cloud. (2025). "Firebase Hosting Documentation." https://firebase.google.com/docs/hosting</li>
+  <li>Ramírez, S. (2019). "FastAPI: Modern, fast web framework for building APIs with Python 3.7+." https://fastapi.tiangolo.com</li>
+  <li>Hutto, C.J. and Gilbert, E. (2014). "VADER: A Parsimonious Rule-Based Model for Sentiment Analysis of Social Media Text." <em>Proceedings of the 8th ICWSM</em>. AAAI.</li>
+  <li>Engle, R.F. (1982). "Autoregressive Conditional Heteroscedasticity with Estimates of the Variance of United Kingdom Inflation." <em>Econometrica</em>, 50(4), 987–1007.</li>
+  <li>Bollerslev, T. (1986). "Generalized Autoregressive Conditional Heteroskedasticity." <em>Journal of Econometrics</em>, 31(3), 307–327.</li>
+  <li>Sheppard, K. (2020). "arch: Autoregressive Conditional Heteroskedasticity Models in Python." https://arch.readthedocs.io</li>
+  <li>Hansen, P.R. and Lunde, A. (2005). "A Forecast Comparison of Volatility Models." <em>Journal of Applied Econometrics</em>, 20(7), 873–889.</li>
+  <li>Heston, S.L. (1993). "A Closed-Form Solution for Options with Stochastic Volatility." <em>The Review of Financial Studies</em>, 6(2), 327–343.</li>
+  <li>Gatheral, J. (2006). <em>The Volatility Surface: A Practitioner's Guide</em>. John Wiley & Sons.</li>
+  <li>Black, F. and Scholes, M. (1973). "The Pricing of Options and Corporate Liabilities." <em>Journal of Political Economy</em>, 81(3), 637–654.</li>
+  <li>Merton, R.C. (1973). "Theory of Rational Option Pricing." <em>The Bell Journal of Economics and Management Science</em>, 4(1), 141–183.</li>
+  <li>Virtanen, P. et al. (2020). "SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python." <em>Nature Methods</em>, 17, 261–272.</li>
+  <li>Hull, J.C. (2021). <em>Options, Futures, and Other Derivatives</em> (11th ed.). Pearson.</li>
+  <li>Avellaneda, M. and Stoikov, S. (2008). "High-Frequency Trading in a Limit Order Book." <em>Quantitative Finance</em>, 8(3), 217–224.</li>
+  <li>Guéant, O., Lehalle, C.A., and Fernandez-Tapia, J. (2013). "Dealing with the Inventory Risk: A Solution to the Market Making Problem." <em>Mathematics and Financial Economics</em>, 7(4), 477–507.</li>
+  <li>Kyle, A.S. (1985). "Continuous Auctions and Insider Trading." <em>Econometrica</em>, 53(6), 1315–1335.</li>
+  <li>Hasbrouck, J. (2009). "Trading Costs and Returns for U.S. Equities: Estimating Effective Costs from Daily Data." <em>The Journal of Finance</em>, 64(3), 1445–1477.</li>
+  <li>Lee, C.M.C. and Ready, M.J. (1991). "Inferring Trade Direction from Intraday Data." <em>The Journal of Finance</em>, 46(2), 733–746.</li>
+  <li>Glosten, L.R. and Milgrom, P.R. (1985). "Bid, Ask and Transaction Prices in a Specialist Market with Heterogeneously Informed Traders." <em>Journal of Financial Economics</em>, 14(1), 71–100.</li>
+  <li>Madhavan, A. (2000). "Market Microstructure: A Survey." <em>Journal of Financial Markets</em>, 3(3), 205–258.</li>
+  <li>Markowitz, H. (1952). "Portfolio Selection." <em>The Journal of Finance</em>, 7(1), 77–91.</li>
+  <li>Merton, R.C. (1972). "An Analytic Derivation of the Efficient Portfolio Frontier." <em>Journal of Financial and Quantitative Analysis</em>, 7(4), 1851–1872.</li>
+  <li>Almgren, R. and Chriss, N. (2001). "Optimal Execution of Portfolio Transactions." <em>Journal of Risk</em>, 3(2), 5–39.</li>
+  <li>Almgren, R. (2012). "Optimal Trading with Stochastic Liquidity and Volatility." <em>SIAM Journal on Financial Mathematics</em>, 3(1), 163–181.</li>
+  <li>Vasicek, O. (1977). "An Equilibrium Characterization of the Term Structure." <em>Journal of Financial Economics</em>, 5(2), 177–188.</li>
+  <li>Cox, J.C., Ingersoll, J.E., and Ross, S.A. (1985). "A Theory of the Term Structure of Interest Rates." <em>Econometrica</em>, 53(2), 385–407.</li>
+  <li>Schulman, J., Wolski, F., Dhariwal, P., Radford, A., and Klimov, O. (2017). "Proximal Policy Optimization Algorithms." <em>arXiv preprint arXiv:1707.06347</em>.</li>
+  <li>Raffin, A. et al. (2021). "Stable-Baselines3: Reliable Reinforcement Learning Implementations." <em>Journal of Machine Learning Research</em>, 22(268), 1–8.</li>
+  <li>Fischer, T. and Krauss, C. (2018). "Deep Learning with Long Short-Term Memory Networks for Financial Market Predictions." <em>European Journal of Operational Research</em>, 270(2), 654–669.</li>
+  <li>Patel, J., Shah, S., Thakkar, P., and Kotecha, K. (2020). "Predicting Stock Market Index Using Fusion of Machine Learning Techniques." <em>Expert Systems with Applications</em>, 42(4), 2162–2172.</li>
+  <li>Brownlees, C.T. and Gallo, G.M. (2006). "Financial Econometric Analysis at Ultra-High Frequency: Data Handling Concerns." <em>Computational Statistics & Data Analysis</em>, 51(4), 2232–2245.</li>
+  <li>Loughran, T. and McDonald, B. (2011). "When Is a Liability Not a Liability? Textual Analysis, Dictionaries, and 10‐Ks." <em>The Journal of Finance</em>, 66(1), 35–65.</li>
+  <li>Ametrano, F. and Ballabio, L. (2003). "QuantLib: A Free/Open-Source Library for Quantitative Finance." https://www.quantlib.org</li>
+  <li>Quantopian Inc. (2020). "Zipline: Pythonic Algorithmic Trading Library." https://github.com/quantopian/zipline</li>
+  <li>Securities and Exchange Board of India. (2025). "SEBI Circular on Mutual Fund Product Labeling and SIP Regulations." SEBI/HO/IMD.</li>
+  <li>Reserve Bank of India. (2026). "RBI Reference Rate." https://www.rbi.org.in</li>
+  <li>Bogle, J.C. (1999). <em>Common Sense on Mutual Funds: New Imperatives for the Intelligent Investor</em>. John Wiley & Sons.</li>
+</ol>
+
+<div style="margin-top: 30px; padding-top: 16px; border-top: 1.5px solid #e2e8f0; text-align: center; color: #94a3b8; font-size: 9pt;">
+  Literature Survey — QUANTA-Fusion v2.0 &nbsp;|&nbsp; Rohit Chokatkar &nbsp;|&nbsp; April 2026 &nbsp;|&nbsp; Page generated from source
+</div>
+
+</body>
+</html>

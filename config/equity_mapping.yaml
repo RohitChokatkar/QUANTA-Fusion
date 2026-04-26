@@ -1,0 +1,12 @@
+# Bloomberg function → QUANTA equity function mapping
+functions:
+  FA:   "fa_financial_analysis"
+  RV:   "rv_relative_valuation"
+  DES:  "des_company_description"
+  BI:   "bi_industry_analysis"
+  EQS:  "eqs_equity_screening"
+  SPLC: "splc_supply_chain"
+  CN:   "cn_company_news"
+  MA:   "ma_mergers_acquisitions"
+  GP:   "gp_historical_chart"
+  GIP:  "gip_intraday_chart"

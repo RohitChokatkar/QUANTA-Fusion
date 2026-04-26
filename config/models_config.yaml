@@ -1,0 +1,53 @@
+# QUANTA-Fusion — Model Hyperparameters
+
+model_1_avellaneda_stoikov:
+  gamma: 0.1       # risk aversion
+  kappa: 1.5       # order arrival intensity
+  horizon: 1.0     # normalised trading horizon
+
+model_2_hawkes:
+  jump_threshold_sigma: 1.5
+  max_iter: 200
+  decay_init: 1.5
+
+model_3_cross_impact:
+  window: 20
+  regularisation: 0.01
+
+model_4_eigenportfolio:
+  n_components: 5
+  zscore_window: 21
+  strong_threshold: 2.0
+  moderate_threshold: 1.0
+
+model_5_realized_volatility:
+  garch_max_iter: 500
+  ewma_lambda: 0.94
+  annualise_factor: 252
+
+model_6_meta_labeling:
+  pt_mult: 1.0
+  sl_mult: 1.0
+  max_hold: 10
+  n_trees: 100
+  cv_splits: 3
+
+model_7_orthogonal_alpha:
+  factors: ["MKT","SMB","HML","MOM"]
+  window: 252
+
+model_8_hmm_regime:
+  n_components: 3
+  covariance_type: "full"
+  n_iter: 150
+
+model_9_adversarial_stress:
+  n_scenarios: 1000
+  var_confidence: 0.99
+  copula: "t"
+  df: 5
+
+model_10_capacity_scaling:
+  adv_fraction: 0.10
+  impact_exponent: 0.5
+  window: 20

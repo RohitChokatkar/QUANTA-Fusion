@@ -2,11 +2,11 @@
 # NEVER commit settings.yaml to GitHub
 
 api_keys:
-  alpha_vantage: "YOUR_ALPHA_VANTAGE_KEY"
-  finnhub: "YOUR_FINNHUB_KEY"
-  twelvedata: "YOUR_TWELVEDATA_KEY"
-  etherscan: "YOUR_ETHERSCAN_KEY"
-  blockchair: "YOUR_BLOCKCHAIR_KEY"
+  alpha_vantage: "P33ZMOT1IUOBENJ6"
+  finnhub: "d6njad1r01qodk60339gd6njad1r01qodk6033a0"
+  twelvedata: "2a7fe93e361240dea043316feee35c57"
+  etherscan: "D3PW4YNNI8SI4G9917GCFI3UQTK3WEFAP1"
+  blockchair: ""
 
 cache:
   ttl_daily: 21600        # 6 hours

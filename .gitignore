@@ -1,33 +1,45 @@
-# Python
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-.env
-venv/
+# Dependencies
+node_modules/
 .venv/
-env/
+venv/
 
-# Data (never commit raw data or cache)
-data/raw/
-data/processed/
-data/cache/
+# Environment
+.env
+.env.local
+.env.*.local
 
-# API Keys — NEVER commit the real settings.yaml
-config/settings.yaml
+# Build
+dist/
+build/
 
 # IDE
 .vscode/
 .idea/
+*.swp
+*.swo
 
 # OS
 .DS_Store
 Thumbs.db
 
-# Jupyter checkpoints
-.ipynb_checkpoints/
+# Logs
+*.log
 
-# Build
-dist/
-build/
+# Firebase
+.firebase/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
 *.egg-info/
+
+# Token files (runtime state â€” never commit)
+token_store.json
+generate_token.py
+config/settings.yaml
+
+# Misc
+*.db
+*.sqlite
+
