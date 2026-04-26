@@ -6,7 +6,12 @@ import os
 import asyncio
 import logging
 from typing import Optional
-from twelvedata import TDClient
+
+try:
+    from twelvedata import TDClient
+    HAS_TD = True
+except ImportError:
+    HAS_TD = False
 
 logger = logging.getLogger(__name__)
 
@@ -15,7 +20,7 @@ class TwelveDataService:
 
     def __init__(self):
         self.api_key = os.getenv("TWELVE_DATA_API_KEY", "")
-        self.td = TDClient(apikey=self.api_key) if self.api_key else None
+        self.td = TDClient(apikey=self.api_key) if (HAS_TD and self.api_key) else None
         self._ws = None
         self._running = False
         self._symbols = []
